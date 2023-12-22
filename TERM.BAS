@@ -80,7 +80,7 @@
  3910 REM this routine sends key presses out the uart
  3920 :
  4000 N = INKEY(0) : REM wait for a key press
- 4010 IF N = -1 THEN LET N=0
+ 4010 IF N = -1 THEN GOTO 5000
  4020 IF N = 27 THEN GOTO 6000 : REM ESC TO EXIT TERMINAL
  4030 ?A = N : REM poke the char we want to send into this memory byte
  4040 CALL senduart% : REM send the data byte
