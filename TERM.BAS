@@ -84,7 +84,7 @@
  4020 IF N = 27 THEN GOTO 6000 : REM ESC TO EXIT TERMINAL
  4030 ?A = N : REM poke the char we want to send into this memory byte
  4040 CALL senduart% : REM send the data byte
- 4110 GOTO 5000
+ 4110 GOTO 4000
  4990 :
  5000 REM This section is to READ data from uart and print to the screen
  5001 :
@@ -94,6 +94,6 @@
  5020 B% = GET(&D0)
  5024 REM PRINT B%;
  5025 PRINT CHR$(B%);
- 5030 GOTO 4000
+ 5030 GOTO 5000
  5999 :
  6000 CALL closeuart%
