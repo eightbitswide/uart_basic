@@ -1,0 +1,57 @@
+What is better than one MOD-WIFI-ESP8266 running SNAIL for Gopher access on the
+internet?  A second MOD-WIFI-ESP8266 loaded with a Hayes Modem Emulator for
+calling Telnet BBS systems over the Internet.   
+
+WARNING!  This will probably void your warranty on your $3.76 (digikey) part. 
+Also once you do this, the device will not work with SNAIL Gopher browser, 
+so do this with a second device.
+
+Here’s what you’ll need 
+to replace the flash on the MOD-WIFI-ESP8266 with a Hayes emulator.
+
+o Arduino IDE
+  Configure the Arduino IDE board manager for ESP8266 on the proper serial port.
+  Load the ESP8266 libraries.
+
+o A copy of PUTTY terminal
+
+o David Hansel’s Hayes modem emulator for the ESP8266
+  https://github.com/dhansel/WifiModem
+
+o A TTL-to-USB serial device
+  Make sure it can provide 3v for the ESP8266.  
+  (Many of these devices supply both 5v and 3v.)
+
+o Four hookup wires to connect the MOD-WIFI-ESP8266 to the TTL-to-USB device.
+
+o The “How to update firmware” guide for MOD-WIFI-ESP8266 hookup diagram.
+ https://olimex.com/Products/IoT/_resources/ESP8266EX-how-to-update-firmware.pdf
+
+Step 1.
+
+Using the hookup guide, connect four wires from the MOD-WIFI-ESP8266
+to the TTL-to-USB device.  You will need TX---RX, RX---TX, 3v, GND.
+
+Launch a copy of putty set at 115200 and see if you can communicate with the
+current firmware.  You should be able to see AT command echoed back.
+Without a linefeed, you won’t get an OK response, but you will see the text 
+echo to the screen, if so you are on track.
+
+Step 2.
+
+Load the WifiModem.ino into the Arduino IDE.  Make sure you have the board
+manager configured for  Generic 8266 and the libraries for ESP8266 loaded.
+Start by trying to simply compiling the code before loading it to the board.
+If it compiles correctly, send it to the board.
+
+Once you see the code load onto the board successfully, relaunch PUTTY and
+configure it for 9600 baud.  Follow the instructions that repeat over and over
+to press C, then configure your WIFI settings.
+
+Congrats!  You now have a Hayes Modem emulator for your AgonLight!
+
+Connect the device to your Agon and load a terminal program set at 9600.  
+Type ATDT BBS.FOZZTEXX.COM
+
+Enjoy!
+
