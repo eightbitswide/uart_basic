@@ -1,0 +1,72 @@
+What is better than one MOD-WIFI-ESP8266 running SNAIL for Gopher access on the
+internet?  A second MOD-WIFI-ESP8266 loaded with a Hayes Modem Emulator for
+calling Telnet BBS systems over the Internet.   
+
+WARNING!  This will probably void your warranty on your $3.76 (digikey) part. 
+Also once you do this, the device will not work with SNAIL Gopher browser, 
+so do this with a second device.
+
+Here is what you will need 
+to replace the flash on the MOD-WIFI-ESP8266 with a Hayes emulator.
+
+o Arduino IDE
+  Configure the Arduino IDE board manager for ESP8266 on the proper serial port.
+  Load the ESP8266 libraries.
+  Set the board type for Olimex MOD-WIFI-ESP8266
+
+o A copy of PUTTY terminal
+
+o Zimodem Modem Emulator by Bo Zimmerman
+  https://github.com/bozimmerman/Zimodem/tree/master
+
+o A TTL-to-USB serial device
+  Make sure it can provide 3v for the ESP8266.  
+  (Many of these devices supply both 5v and 3v.)
+
+o Four hookup wires to connect the MOD-WIFI-ESP8266 to the TTL-to-USB device.
+
+o The HOW TO UPGRADE FIRMWARE guide for MOD-WIFI-ESP8266 hookup diagram.
+ https://olimex.com/Products/IoT/_resources/ESP8266EX-how-to-update-firmware.pdf
+
+
+Step 1.
+
+Using the hookup guide, connect four wires from the MOD-WIFI-ESP8266
+to the TTL-to-USB device.  You will need TX---RX, RX---TX, 3v, GND.
+
+Launch a copy of putty set at 115200 and see if you can communicate with the
+current firmware.  You should be able to see AT command echoed back.
+Without a linefeed, you will not get an OK response, but you will see the text 
+echo to the screen, if so you are on track.
+
+Step 2.
+
+Load the zimodem.ino into the Arduino IDE.  Make sure you have the board
+manager configured for Olimex MOD-WIFI-ESP8266 and the libraries for ESP8266.
+Start by trying to simply compiling the code before loading it to the board.
+If it compiles correctly, send it to the board.
+
+o You'll have to hold the button in on the MOD-WIFI-ESP8266 and replug the
+  device into the computer while holding the button.  Continue to hold
+  the button until the actual programming starts with the Arduino IDE.
+
+Once you see the code load onto the board successfully, relaunch PUTTY and
+configure it for 1200 baud.  Type AT+CONFIG to setup Wifi and other settings.
+
+Yes, you can change the baud rate.   The serial terminal works well at 9600.
+With the baud rate connected at 1200 baud with Putty, issue a ATB9600,
+then reconnect with putty @ 9600 baud.  If ATI works, type AT&W to write
+the new settings to the ESP8266's flash.
+
+Move it to your Agon and load the BASIC terminal with 9600 baud settings.
+
+Congrats!  You now have a Hayes Modem emulator for your AgonLight!
+
+Connect the device to your Agon and load a terminal program set at 9600.  
+Type ATDT BBS.FOZZTEXX.COM
+
+Note: Don't use AT&U6502 to update your device over the internet.
+It will downgrade the unit from 4.0.1 to 3.7.
+
+Enjoy!
+
